@@ -76,7 +76,7 @@ class Team(models.Model):
     name            = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.abbr
+        return f'{self.city} {self.name}'
 
 class Game(models.Model):
     week            = models.ForeignKey('Week', on_delete=models.CASCADE)
