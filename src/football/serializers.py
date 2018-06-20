@@ -1,7 +1,13 @@
-from .models import Game
-import rest_framework.serializers as serializers
+from rest_framework import serializers
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+from django.contrib.auth.models import User
+from football.models import Game
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email', 'is_staff')
 
 class GameSerializer(serializers.ModelSerializer):
     class Meta:

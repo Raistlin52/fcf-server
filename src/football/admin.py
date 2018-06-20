@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 # Register your models here.
-from .models import (Badge, Bet, HistoricBankroll, Leg, ProfileBadge,
+from football.models import (Badge, Bet, HistoricBankroll, Leg, ProfileBadge,
   Profile, Game, Season, Team, Week)
 
 admin.site.register(Profile)
