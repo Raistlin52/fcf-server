@@ -2,11 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class RestaurantLocation(models.Model):
-    name            = models.CharField(max_length=120)
-    location        = models.CharField(max_length=120, null=True, blank=True)
-    category        = models.CharField(max_length=120, null=True, blank=True)
-
 class Season(models.Model):
     season_id       = models.CharField(max_length=50, primary_key=True)
     league          = models.CharField(max_length=120)
@@ -17,7 +12,7 @@ class Season(models.Model):
 
 class Week(models.Model):
     week_id         = models.CharField(max_length=50, primary_key=True)
-    season          = models.ForeignKey('Season', on_delete=models.CASCADE)
+    season          = models.ForeignKey(Season, to_field='season_id', on_delete=models.CASCADE)
     name            = models.CharField(max_length=50)
     week_number     = models.DecimalField(max_digits=2, decimal_places=0)
     betting_open    = models.DateTimeField()

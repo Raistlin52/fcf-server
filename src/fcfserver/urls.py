@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.urls import path
 from django.conf.urls import re_path, include
+from django.contrib import admin
+from rest_framework.schemas import get_schema_view
+
+schema_view = get_schema_view(title="FCF Server API")
 
 urlpatterns = [
+    path(r'admin/', admin.site.urls),
     re_path(r'^api-auth/', include('rest_framework.urls')),
     re_path(r'^', include('football.urls')),
+    re_path(r'^schema/$', schema_view)
 ]
