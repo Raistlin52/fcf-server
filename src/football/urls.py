@@ -1,3 +1,4 @@
+from django.urls import path
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from football import views
@@ -13,5 +14,7 @@ router.register(r'teams', views.TeamViewSet)
 router.register(r'badges', views.BadgeViewSet)
 
 urlpatterns = [
+  path('games/week/<week_id>/', views.GamesOfTheWeek.as_view()),
+  path('gameswithid/', views.GamesWithID.as_view()),
   url(r'^', include(router.urls)),
 ]

@@ -1,12 +1,44 @@
 from django.contrib.auth.models import User
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from football import models
 from football import serializers
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
+class GamesOfTheWeek(APIView):
+    """
+    List all the game data for a particular week
+    """
+    queryset = models.Game.objects.all()
+
+    def get(self, request, week_id, format=None):
+        games = models.Game.objects.filter(week_id=week_id)
+        serializer = serializers.GameSerializer(games, many=True)
+        return Response(serializer.data)
+    
+
+class GamesWithID(APIView):
+    """
+    List all the game data for a particular week
+    """
+    queryset = models.Game.objects.all()
+
+    def get(self, request, format=None):
+        games = models.Game.objects.all()
+
+        updatedresponse = {}
+        for g in games:
+            serializer = serializers.GameSerializer(g)
+            updatedresponse[g.id] = serializer.data
+
+        print(updatedresponse)
+        return Response(updatedresponse)
+    
 
 class GameViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Game.objects.all()
     serializer_class = serializers.GameSerializer
+    pagination_class = None
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.User.objects.all()
