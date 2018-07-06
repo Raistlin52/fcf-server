@@ -93,6 +93,8 @@ class Game(models.Model):
 
     class Meta:
         verbose_name_plural = 'Schedule'
+        ordering = ['game_time']
+
 
 
 class Bet(models.Model):

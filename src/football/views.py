@@ -16,10 +16,45 @@ class GamesOfTheWeek(APIView):
         serializer = serializers.GameSerializer(games, many=True)
         return Response(serializer.data)
     
+class SeasonSchedule(APIView):
+    """
+    List all the games in a nested week format
+    """
+    queryset = models.Game.objects.all()
+
+    season_weeks = [
+        's2017.w1',
+        's2017.w2',
+        's2017.w3',
+        's2017.w4',
+        's2017.w5',                
+        's2017.w6',
+        's2017.w7',
+        's2017.w8',
+        's2017.w9',
+        's2017.w10',
+        's2017.w11',
+    ]
+
+    def get(self, request, format=None):
+        
+        season_schedule = {}
+        for w in self.season_weeks:
+            weekly_games = models.Game.objects.filter(week_id=w)
+            
+            weekly_schedule = {}
+            for g in weekly_games:
+                serializer = serializers.GameSerializer(g)
+                weekly_schedule[g.id] = serializer.data
+            
+            season_schedule[w] = weekly_schedule
+
+        return Response(season_schedule)
+    
 
 class GamesWithID(APIView):
     """
-    List all the game data for a particular week
+    List ALL games
     """
     queryset = models.Game.objects.all()
 
@@ -31,7 +66,6 @@ class GamesWithID(APIView):
             serializer = serializers.GameSerializer(g)
             updatedresponse[g.id] = serializer.data
 
-        print(updatedresponse)
         return Response(updatedresponse)
     
 

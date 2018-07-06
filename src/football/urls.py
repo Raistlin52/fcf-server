@@ -16,5 +16,6 @@ router.register(r'badges', views.BadgeViewSet)
 urlpatterns = [
   path('games/week/<week_id>/', views.GamesOfTheWeek.as_view()),
   path('gameswithid/', views.GamesWithID.as_view()),
+  path('seasonschedule/', views.SeasonSchedule.as_view()),
   url(r'^', include(router.urls)),
 ]
