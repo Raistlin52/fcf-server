@@ -25,8 +25,7 @@ SECRET_KEY = '&$pruobzbu!ti_9_9^-9ry35vn2lb5evzp12vf#@q-y!y0n&j9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -86,6 +85,7 @@ AUTHENTICATION_BACKENDS = (
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = (
+    'null',
     'google.com',
     'hostname.example.com',
     'localhost:8000',
